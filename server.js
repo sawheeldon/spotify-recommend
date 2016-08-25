@@ -6,6 +6,7 @@ var app = express();
 var getFromApi = function(endpoint, args) {
     var emitter = new events.EventEmitter();
     unirest.get('https://api.spotify.com/v1/' + endpoint)
+    unirest.get('https://api.spotify.com/v1/artists/{id}/related-artists' + endpoint)
            .qs(args)
            .end(function(response) {
                 if (response.ok) {
@@ -36,5 +37,6 @@ app.get('/search/:name', function(req, res) {
         res.sendStatus(code);
     });
 });
+
 
 app.listen(8080);
